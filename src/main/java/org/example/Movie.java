@@ -3,23 +3,7 @@ package org.example;
 abstract class Price {
     abstract int getPriceCode();
 
-    double getCharge(int daysRented) {
-        double thisAmount = 0;
-        switch (getPriceCode()) {
-            case Movie.REGULAR:
-                thisAmount += 2;
-                if (daysRented > 2) thisAmount += (daysRented - 2) * 1.5;
-                break;
-            case Movie.NEW_RELEASE:
-                thisAmount += daysRented * 3;
-                break;
-            case Movie.CHILDRENS:
-                thisAmount += 1.5;
-                if (daysRented > 3) thisAmount += (daysRented - 3) * 1.5;
-                break;
-        }
-        return thisAmount;
-    }
+    abstract double getCharge(int daysRented);
 }
 
 class ChildrenPrice extends Price {
@@ -28,6 +12,12 @@ class ChildrenPrice extends Price {
     int getPriceCode() {
         return Movie.CHILDRENS;
     }
+
+    @Override
+    double getCharge(int daysRented) {
+        if (daysRented > 3) return 1.5 + (daysRented - 3) * 1.5;
+        return 1.5;
+    }
 }
 
 class RegularPrice extends Price {
@@ -35,12 +25,23 @@ class RegularPrice extends Price {
     int getPriceCode() {
         return Movie.REGULAR;
     }
+
+    @Override
+    double getCharge(int daysRented) {
+        if (daysRented > 3) return 2 + (daysRented - 2) * 1.5;
+        return 2;
+    }
 }
 
 class NewReleasePrice extends Price {
     @Override
     int getPriceCode() {
         return Movie.NEW_RELEASE;
+    }
+
+    @Override
+    double getCharge(int daysRented) {
+        return daysRented * 3;
     }
 }
 
