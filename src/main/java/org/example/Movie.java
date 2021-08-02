@@ -1,50 +1,5 @@
 package org.example;
 
-abstract class Price {
-    abstract int getPriceCode();
-
-    abstract double getCharge(int daysRented);
-}
-
-class ChildrenPrice extends Price {
-
-    @Override
-    int getPriceCode() {
-        return Movie.CHILDRENS;
-    }
-
-    @Override
-    double getCharge(int daysRented) {
-        if (daysRented > 3) return 1.5 + (daysRented - 3) * 1.5;
-        return 1.5;
-    }
-}
-
-class RegularPrice extends Price {
-    @Override
-    int getPriceCode() {
-        return Movie.REGULAR;
-    }
-
-    @Override
-    double getCharge(int daysRented) {
-        if (daysRented > 3) return 2 + (daysRented - 2) * 1.5;
-        return 2;
-    }
-}
-
-class NewReleasePrice extends Price {
-    @Override
-    int getPriceCode() {
-        return Movie.NEW_RELEASE;
-    }
-
-    @Override
-    double getCharge(int daysRented) {
-        return daysRented * 3;
-    }
-}
-
 public class Movie {
     public static final int CHILDRENS = 2;
     public static final int REGULAR = 0;
