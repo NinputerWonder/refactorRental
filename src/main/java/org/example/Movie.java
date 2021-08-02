@@ -6,6 +6,7 @@ public class Movie {
     public static final int NEW_RELEASE = 1;
     private String _title;
     private Price _price;
+    private PriceCode _priceCode;
 
     public Movie(String title, int priceCode) {
         _title = title;
@@ -13,19 +14,22 @@ public class Movie {
     }
 
     public int getPriceCode() {
-        return _price.getPriceCode();
+        return _priceCode.getCode();
     }
 
     public void setPriceCode(int arg) {
         switch (arg) {
             case CHILDRENS:
                 _price = new ChildrenPrice();
+                _priceCode = PriceCode.CHILDRENDS;
                 break;
             case REGULAR:
                 _price = new RegularPrice();
+                _priceCode = PriceCode.REGULAR;
                 break;
             case NEW_RELEASE:
                 _price = new NewReleasePrice();
+                _priceCode = PriceCode.NEW_RELEASE;
                 break;
             default:
                 throw new IllegalArgumentException("error arg");
